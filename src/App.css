@@ -40,7 +40,13 @@ body,
 }
 
 .bookshelf-title {
+ 
   border-bottom: 1px solid #dedede;
+  text-align: center;
+  margin: 20px 0; 
+  font-size: 1.5em; 
+  font-weight: bold; 
+  color: #2e7c31;
 }
 .bookshelf-books {
   text-align: center;
@@ -175,3 +181,80 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+/* Main Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+}
+
+/* Main Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+}
+
+/* Main Content */
+.main-content {
+  flex: 1; /* Pushes the footer to the bottom */
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.footer {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  position: relative;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #60ac5d;
+  transform: scale(1.1);
+}
+
+p {
+  font-size: 14px;
+  margin: 0;
+}
+
+
+/* Search Bar Styling */
+.search-top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.search-top-right input {
+  padding: 8px 12px;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1em;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+

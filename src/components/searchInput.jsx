@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import { search } from "../utils/BooksAPI";
 
-const SearchPage = ({ booksOnShelves, onShelfChange }) => {
+const SearchInput = ({ booksOnShelves, onShelfChange }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
@@ -43,7 +43,7 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
-    setError(null); 
+    setError(null);
   };
 
   const handleShelfChange = (book, shelf) => {
@@ -78,9 +78,9 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
   );
 };
 
-SearchPage.propTypes = {
+SearchInput.propTypes = {
   booksOnShelves: PropTypes.array.isRequired, 
   onShelfChange: PropTypes.func.isRequired,  
 };
 
-export default SearchPage;
+export default SearchInput;

@@ -1,20 +1,29 @@
-import './App.css';
+import "./App.css";
 
-import { getAll, search, update } from './BooksAPI';
-import { useEffect, useState } from 'react';
+import { getAll, search, update } from "./utils/BooksAPI";
+import { useEffect, useState } from "react";
 
-import Bookshelf from './Bookshelf';
-import SearchPage from './SearchPage';
+import Bookshelf from "./components/Bookshelf";
+import Footer from "./components/Footer";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [books, setBooks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
+ 
   useEffect(() => {
     getAll().then((books) => setBooks(books));
+   
   }, []);
+useEffect(() => {
+    const fetchBooks = async () => {
+      const books = await getAll();
+    setBooks(books);
+    };
 
+    fetchBooks();
+  }, []);
   const handleShelfChange = (book, shelf) => {
     update(book, shelf).then(() => {
       book.shelf = shelf;
@@ -31,15 +40,18 @@ function App() {
       setSearchResults([]);
     }
   };
-
   return (
     <div className="app">
+      
       {showSearchPage ? (
         <SearchPage
           searchResults={searchResults}
           onShelfChange={handleShelfChange}
           onSearch={handleSearch}
           onCloseSearch={() => setShowSearchPage(false)}
+          
+      
+      
         />
       ) : (
         <div className="list-books">
@@ -49,25 +61,24 @@ function App() {
           <div className="list-books-content">
             <Bookshelf
               title="Currently Reading"
-              books={books.filter((book) => book.shelf === 'currentlyReading')}
+              books={books.filter((book) => book.shelf === "currentlyReading")}
               onShelfChange={handleShelfChange}
             />
             <Bookshelf
               title="Want to Read"
-              books={books.filter((book) => book.shelf === 'wantToRead')}
+              books={books.filter((book) => book.shelf === "wantToRead")}
               onShelfChange={handleShelfChange}
             />
             <Bookshelf
               title="Read"
-              books={books.filter((book) => book.shelf === 'read')}
+              books={books.filter((book) => book.shelf === "read")}
               onShelfChange={handleShelfChange}
             />
-          </div>
-          <div className="open-search">
-            <button onClick={() => setShowSearchPage(true)}>Add a book</button>
+           
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }
