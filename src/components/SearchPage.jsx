@@ -1,14 +1,16 @@
 import  { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import Book from "./Book";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import { search } from "../utils/BooksAPI";
+import { FaArrowLeft } from "react-icons/fa";
 
 const SearchPage = ({ booksOnShelves, onShelfChange }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -53,7 +55,10 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
   return (
     <div className="search-page">
       <div className="search-bar">
-        <input
+      <button className="close-search" onClick={() => navigate("/")}>
+                <FaArrowLeft />
+      </button>
+        <input className="search-input"
           type="text"
           value={query}
           onChange={handleSearchChange}
@@ -61,6 +66,7 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
         />
       </div>
       <div className="search-results">
+      
         {error && <p>{error}</p>}
         <ul>
           {results.length > 0 ? (

@@ -1,7 +1,9 @@
 html,
 body,
 .root {
-  height: 100%;
+  /* height: 100%; */
+  height: 100vh;
+  margin: 0%;
 }
 body {
   line-height: 1.5;
@@ -40,20 +42,13 @@ body,
 }
 
 .bookshelf-title {
- 
   border-bottom: 1px solid #dedede;
-  text-align: center;
-  margin: 20px 0; 
-  font-size: 1.5em; 
-  font-weight: bold; 
-  color: #2e7c31;
-
 }
 .bookshelf-books {
   text-align: center;
 }
 
-.open-search {
+ .open-search {
   position: fixed;
   right: 25px;
   bottom: 25px;
@@ -63,14 +58,14 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  /* background: #2e7d32; */
+  background: #2e7d32;
   background-image: url("./icons/add.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   font-size: 0;
-}
+} 
 
 /* search page */
 
@@ -93,7 +88,7 @@ body,
   font-size: 1.25em;
   border: none;
   outline: none;
-}
+} 
 
 .close-search {
   display: block;
@@ -101,17 +96,101 @@ body,
   left: 15px;
   width: 50px;
   height: 53px;
-  background: white;
+  border-radius: 10%;
+  background: rgb(245, 242, 242);
   background-image: url("./icons/arrow-back.svg");
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
+  color: #0b7942;
   background-size: 28px;
   font-size: 0;
-}
+} 
 
 .search-books-results {
   padding: 80px 10px 20px;
+} 
+
+/* General styles for the search page */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
+
+/* Styling the search bar container */
+.search-bar {
+  position: fixed; /* Keeps the bar at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the viewport */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 100; /* Ensure it's above other content */
+}
+
+/* Back button styling */
+.close-search {
+  background: none;
+  border: none;
+  color: #0077ff;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.close-search:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* Styling the search input */
+.search-input {
+  flex: 1; /* Fills remaining space */
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+}
+
+.search-input:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.3); /* Blue glow on focus */
+}
+
+/* Search results container */
+.search-results {
+  margin-top: 70px; /* Leaves space for the fixed search bar */
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.search-results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-bottom: 15px;
+}
+
+/* Error message styling */
+.search-results p {
+  color: #888;
+  font-size: 16px;
+  text-align: center;
+  margin: 20px 0;
+}
+
 
 /* books grid */
 
@@ -182,121 +261,88 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
-
-/* Main Container */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+/* my css */
+.add {
+  cursor: pointer;
+  color: #f3f8f6;
+  background: rgb(2, 114, 62);
+  width: 50px;
+  height: 53px;
+  padding: 10px;
+  border: 1px solid #045e3b;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-/* Main Container */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensures the container takes up the full height of the viewport */
+add:hover {
+  background: rgb(1, 87, 48);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Main Content */
-.main-content {
-  flex: 1; /* Pushes the footer to the bottom */
-  padding: 20px;
-  background-color: #f4f4f4;
-}
 
+
+/* Footer Styles */
 .footer {
-  background-color: #2e7d32;
-  color: white;
+  background-color: #222; /* Dark background */
+  color: #fff; /* White text */
+  padding: 20px 0; /* Vertical padding */
   text-align: center;
-  padding: 20px 10px;
-  position: relative;
-  width: 100%;
+  margin-top: auto; /* Push footer to the bottom */
 }
 
 .footer-content {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto; /* Center align */
+  padding: 0 15px; /* Responsive padding */
 }
 
 .social-icons {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  justify-content: center; /* Center social icons horizontally */
+  gap: 15px; /* Space between icons */
   margin-bottom: 10px;
 }
 
 .social-icons a {
-  color: white;
-  transition: transform 0.3s ease, color 0.3s ease;
+  color: #fff; /* Default icon color */
+  transition: color 0.3s ease; /* Smooth hover effect */
 }
 
 .social-icons a:hover {
-  color: #60ac5d;
-  transform: scale(1.1);
+  color: #0077ff; /* Highlight color on hover */
 }
 
-p {
-  font-size: 14px;
-  margin: 0;
+.footer p {
+  font-size: 14px; /* Slightly smaller text */
+  margin-top: 10px; /* Space above the text */
+  color: #aaa; /* Light gray text */
 }
 
+.search-input {
+  width: 100%; /* Full width of the parent container */
+  max-width: 1248px; /* Optional: limit the maximum width */
+  padding: 10px 15px; /* Inner spacing for better usability */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Easy-to-read font size */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  outline: none; /* Remove default outline on focus */
+  margin: 0 auto;
 
-/* Search Bar Styling */
-.search-top-right {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
+  display: block; /* Ensure it behaves like a block-level element */
 }
 
-.search-top-right input {
-  padding: 8px 12px;
-  border: 1px solid #dedede;
-  border-radius: 4px;
-  outline: none;
-  font-size: 1em;
-  background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+.search-input:focus {
+  border-color: #0077ff; /* Highlight border on focus */
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.5); /* Glow effect */
 }
 
-.search-page {
-  padding: 20px;
-}
-
-.search-bar {
-  margin-bottom: 20px;
-
-}
-
-.search-bar input {
-  width: 50%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.search-results {
-  margin-top: 20px;
-  flex-direction: column;
-}
-
-.search-results ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.search-results li {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  flex-direction: row;
-
-}
-
-.search-results p {
-  font-size: 16px;
-  color: #888;
+/* Optional container to center input vertically */
+.search-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Spacing for smaller screens */
 }
