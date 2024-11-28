@@ -1,10 +1,12 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Book from "./Book";
+import Book from "./Books";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
-import { search } from "../utils/BooksAPI";
+import * as BookAPI from "../utils/BookAPI";
 import { FaArrowLeft } from "react-icons/fa";
+
+
 
 const SearchPage = ({ booksOnShelves, onShelfChange }) => {
   const [query, setQuery] = useState("");
@@ -20,16 +22,26 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
 
     const fetchBooks = debounce(async () => {
       try {
-        const data = await search(query, 20);
-        // Merge books with their shelf information
-        const updatedResults = data.map((book) => {
-          const bookOnShelf = booksOnShelves.find((b) => b.id === book.id);
-          return {
-            ...book,
-            shelf: bookOnShelf ? bookOnShelf.shelf : "none",
-          };
-        });
-        setResults(updatedResults);
+        const data = await BookAPI.search(query, 20);
+        if (data.error) {
+          setError("No books found.");
+          setResults([]);
+        } else {
+          // Filter books by name
+          const filteredBooks = data.filter((book) =>
+            book.title.toLowerCase().includes(query.toLowerCase())
+          );
+          // Merge books with their shelf information
+          const updatedResults = filteredBooks.map((book) => {
+            const bookOnShelf = booksOnShelves.find((b) => b.id === book.id);
+            return {
+              ...book,
+              shelf: bookOnShelf ? bookOnShelf.shelf : "none",
+            };
+          });
+          setResults(updatedResults);
+          console.log(updatedResults);
+        }
       } catch {
         setError("No books found.");
         setResults([]);
@@ -45,7 +57,7 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
 
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
-    setError(null); 
+    setError(null);
   };
 
   const handleShelfChange = (book, shelf) => {
@@ -55,10 +67,11 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
   return (
     <div className="search-page">
       <div className="search-bar">
-      <button className="close-search" onClick={() => navigate("/")}>
-                <FaArrowLeft />
-      </button>
-        <input className="search-input"
+        <button className="close-search" onClick={() => navigate(-1)}>
+          <FaArrowLeft />
+        </button>
+        <input
+          className="search-input"
           type="text"
           value={query}
           onChange={handleSearchChange}
@@ -66,7 +79,6 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
         />
       </div>
       <div className="search-results">
-      
         {error && <p>{error}</p>}
         <ul>
           {results.length > 0 ? (
@@ -85,8 +97,8 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
 };
 
 SearchPage.propTypes = {
-  booksOnShelves: PropTypes.array.isRequired, 
-  onShelfChange: PropTypes.func.isRequired,  
+  booksOnShelves: PropTypes.array.isRequired,
+  onShelfChange: PropTypes.func.isRequired,
 };
 
 export default SearchPage;

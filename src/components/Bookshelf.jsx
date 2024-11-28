@@ -1,4 +1,4 @@
-import Book from './Book';
+import Book from './Books';
 import PropTypes from 'prop-types';
 
 const Bookshelf = ({ title, books, onShelfChange }) => (

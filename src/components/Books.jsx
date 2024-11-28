@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Book = ({ book, onShelfChange }) => {
+const Books = ({ book, onShelfChange }) => {
   // Fallbacks for missing data
   const {
     title = "No Title Available",
@@ -44,7 +44,7 @@ const Book = ({ book, onShelfChange }) => {
   );
 };
 
-Book.propTypes = {
+Books.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
@@ -57,5 +57,5 @@ Book.propTypes = {
   onShelfChange: PropTypes.func.isRequired,
 };
 
-export default Book;
+export default Books;
 

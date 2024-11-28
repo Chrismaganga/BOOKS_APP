@@ -1,5 +1,5 @@
 import "./App.css";
-import { getAll, search, update } from "./utils/BooksAPI";
+import { getAll, search, update } from "./utils/BookAPI";
 import { useEffect, useState } from "react";
 import { GrAdd } from "react-icons/gr";
 import Bookshelf from "./components/Bookshelf";
@@ -48,10 +48,9 @@ function App() {
             path="/search"
             element={
               <SearchPage
-                searchResults={searchResults}
-                onShelfChange={handleShelfChange}
-                handleSearch={handleSearch}
-              />
+      booksOnShelves={books}
+      onShelfChange={handleShelfChange}
+    />
             }
           />
           <Route
@@ -77,6 +76,8 @@ function App() {
                     books={books.filter((book) => book.shelf === "read")}
                     onShelfChange={handleShelfChange}
                   />
+        
+    
                 </div>
               </div>
             }
