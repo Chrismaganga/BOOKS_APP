@@ -88,7 +88,7 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
               </li>
             ))
           ) : (
-            <p>No results found.</p>
+            <p>search for results.</p>
           )}
         </ul>
       </div>
