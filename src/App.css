@@ -300,7 +300,7 @@ add:hover {
 .social-icons {
   display: flex;
   justify-content: center; /* Center social icons horizontally */
-  gap: 15px; /* Space between icons */
+  gap: 50px; /* Space between icons */
   margin-bottom: 10px;
 }
 
@@ -345,4 +345,23 @@ add:hover {
   align-items: center; /* Center vertically */
   height: 100vh; /* Full viewport height */
   padding: 20px; /* Spacing for smaller screens */
+}
+.searched-books{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+
+}
+
+.search-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: #0056b3;
+  border-radius: 5px;
 }

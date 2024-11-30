@@ -47,9 +47,11 @@ function App() {
           <Route
             path="/search"
             element={
-              <SearchPage
+    <SearchPage
       booksOnShelves={books}
       onShelfChange={handleShelfChange}
+      searchResults={searchResults}
+      onSearch={handleSearch}
     />
             }
           />
