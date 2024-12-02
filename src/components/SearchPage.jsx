@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Book from "./Books";
 import PropTypes from "prop-types";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import * as BookAPI from "../utils/BookAPI";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -62,9 +62,7 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
     if (book) {
       onShelfChange(book, shelf);
       setResults((prevResults) =>
-        prevResults.map((b) =>
-          b.id === book.id ? { ...b, shelf: shelf } : b
-        )
+        prevResults.map((b) => (b.id === book.id ? { ...b, shelf: shelf } : b))
       );
     }
   };
@@ -75,10 +73,15 @@ const SearchPage = ({ booksOnShelves, onShelfChange }) => {
         <button className="close-search" onClick={() => navigate(-1)}>
           <FaArrowLeft />
         </button>
+        <label htmlFor="search-input">Search books:</label>
         <input
           className="search-input"
           type="text"
+          id="search-input"
+          name="search-input"
           value={query}
+          width={200}
+          height={200}
           onChange={handleSearchChange}
           placeholder="Search books..."
         />

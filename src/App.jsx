@@ -11,14 +11,13 @@ import { Filter } from "./components/Filter";
 function App() {
   const [books, setBooks] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
- 
 
   // Fetch books once on component mount
   useEffect(() => {
     const fetchBooks = async () => {
       const books = await getAll();
       setBooks(books);
-      };
+    };
 
     fetchBooks();
   }, []);
@@ -34,7 +33,13 @@ function App() {
 
   const handleSearch = (query) => {
     if (query) {
-      search(query).then((results) => setSearchResults(results));
+      search(query).then((results) => {
+        if (results.error) {
+          setSearchResults([]);
+        } else {
+          setSearchResults(results);
+        }
+      });
     } else {
       setSearchResults([]);
     }
@@ -47,12 +52,12 @@ function App() {
           <Route
             path="/search"
             element={
-    <SearchPage
-      booksOnShelves={books}
-      onShelfChange={handleShelfChange}
-      searchResults={searchResults}
-      onSearch={handleSearch}
-    />
+              <SearchPage
+                booksOnShelves={books}
+                onShelfChange={handleShelfChange}
+                searchResults={searchResults}
+                onSearch={handleSearch}
+              />
             }
           />
           <Route
@@ -65,7 +70,9 @@ function App() {
                 <div className="list-books-content">
                   <Bookshelf
                     title="Currently Reading"
-                    books={books.filter((book) => book.shelf === "currentlyReading")}
+                    books={books.filter(
+                      (book) => book.shelf === "currentlyReading"
+                    )}
                     onShelfChange={handleShelfChange}
                   />
                   <Bookshelf
@@ -78,16 +85,13 @@ function App() {
                     books={books.filter((book) => book.shelf === "read")}
                     onShelfChange={handleShelfChange}
                   />
-        
-    
                 </div>
               </div>
             }
           />
         </Routes>
-        <Filter/>
+        <Filter />
         <Footer />
-       
       </div>
     </Router>
   );
