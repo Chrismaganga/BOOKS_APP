@@ -266,11 +266,11 @@ body,
   cursor: pointer;
   color: #f3f8f6;
   background: rgb(2, 114, 62);
-  width: 50px;
-  height: 53px;
+  width: 45px;
+  height: 45px;
   padding: 10px;
   border: 1px solid #045e3b;
-  border-radius: 5px;
+  border-radius: 95px;
   font-size: 1em;
   transition: background 0.3s, box-shadow 0.3s;
 }
